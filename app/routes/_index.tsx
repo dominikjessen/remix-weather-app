@@ -1,50 +1,38 @@
-import type { MetaFunction } from '@remix-run/node';
-import { useState } from 'react';
+import { json, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import Current from '~/components/current';
+import Forecast from '~/components/forecast';
+import Search from '~/components/search';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Remix Weather Demo' }, { name: 'description', content: 'Check the weather in...' }];
 };
 
-export default function Index() {
-  const [searchValue, setSearchValue] = useState('');
+export async function loader({ request }: LoaderFunctionArgs) {
+  const url = new URL(request.url);
+  const latLong = url.searchParams.get('location')?.split(',') ?? null;
+  if (!latLong) return null;
 
-  function geoLocateUser() {
-    function success(position: GeolocationPosition) {
-      console.log(position.coords.latitude, position.coords.longitude);
-    }
+  const timezone = 'timezone=auto';
+  const current = 'current=weather_code,temperature_2m';
+  const daily = 'daily=weather_code,temperature_2m_max,temperature_2m_min';
 
-    function error() {
-      alert('Could not locate user');
-    }
-
-    if (!navigator.geolocation) {
-      alert('Geolocation not supported by your browser');
-    } else {
-      navigator.geolocation.getCurrentPosition(success, error);
-    }
+  const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latLong[0]}&longitude=${latLong[1]}&${timezone}&${current}&${daily}`);
+  if (res.ok) {
+    return json(await res.json());
   }
+
+  return null;
+}
+
+export default function Index() {
+  const forecast = useLoaderData<typeof loader>();
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center w-4/5 mx-auto py-12">
-      <div className="w-full py-8 rounded bg-green-200">
-        <input placeholder="Search for a location" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-        <button className="w-10 h-10 rounded hover:bg-slate-300 text-slate-700" onClick={geoLocateUser}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 m-auto"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polygon points="3 11 22 2 13 21 11 13 3 11" />
-          </svg>
-        </button>
-      </div>
-      <div className="w-full py-8 rounded bg-pink-200">Current weather section</div>
-      <div className="w-full py-8 rounded bg-amber-200">Forecast next days section</div>
+      <Search />
+      {forecast && <Current forecast={forecast.current} />}
+      {forecast && <Forecast forecast={forecast.daily} />}
     </div>
   );
 }
