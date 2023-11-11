@@ -1,8 +1,9 @@
 import { json, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import Current from '~/components/current';
-import Forecast from '~/components/forecast';
+import CurrentForecast from '~/components/currentForecast';
+import DailyForecast from '~/components/dailyForecast';
 import Search from '~/components/search';
+import { type WeatherForecast } from '~/types/weather';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Remix Weather Demo' }, { name: 'description', content: 'Check the weather in...' }];
@@ -26,13 +27,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function Index() {
-  const forecast = useLoaderData<typeof loader>();
+  const forecast = useLoaderData<WeatherForecast>();
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center w-4/5 mx-auto py-12">
       <Search />
-      {forecast && <Current forecast={forecast.current} />}
-      {forecast && <Forecast forecast={forecast.daily} />}
+      {forecast && forecast.current && <CurrentForecast data={forecast.current} />}
+      {forecast && forecast.daily && <DailyForecast data={forecast.daily} />}
     </div>
   );
 }
