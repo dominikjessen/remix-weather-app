@@ -4,6 +4,7 @@ type ForecastArrayWithGenericKeys = {
   [key: string]: string[] | number[];
 } & DailyForecast;
 
+/* This function turns the response data from openmeteo's API into an array of data to be able to map through */
 export const arrayTransformDailyForecastData = (data: ForecastArrayWithGenericKeys): Array<SingleDayForecast> => {
   if (!data || Object.keys(data).length === 0) {
     return [];
