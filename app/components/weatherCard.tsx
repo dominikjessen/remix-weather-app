@@ -1,4 +1,4 @@
-import WeatherIcon from '~/lib/weatherIcon';
+import WeatherIcon from '~/components/weatherIcon';
 import type { SingleDayForecast } from '~/types/weather';
 
 const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
