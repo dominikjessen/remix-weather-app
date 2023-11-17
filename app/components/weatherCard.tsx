@@ -14,8 +14,8 @@ export default function WeatherCard({ variant, data }: WeatherCardProps) {
   return (
     <div className="w-full h-full px-8 py-4 rounded-lg bg-white flex flex-col items-center justify-center gap-4">
       <div className="flex flex-col items-center gap-1 text-lg">
-        <span className="uppercase text-slate-600 tracking-wider font-bold">{DAYS_OF_WEEK[new Date(data.time).getDay()]}</span>
-        <div className="font-bold tracking-wider">
+        <span className="uppercase text-slate-500 tracking-wider font-bold">{DAYS_OF_WEEK[new Date(data.time).getDay()]}</span>
+        <div className="font-bold tracking-wider text-slate-600">
           <span>{new Date(data.time).getDate()}</span>
           <span>/</span>
           <span>{new Date(data.time).getMonth() + 1}</span>

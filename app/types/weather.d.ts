@@ -13,17 +13,25 @@ export type WeatherForecast = {
 };
 
 export type CurrentUnits = {
-  time?: 'iso8601';
-  interval?: 'seconds';
-  weather_code?: 'wmo code';
-  temperature_2m?: '°C';
+  time: 'iso8601';
+  interval: 'seconds';
+  weather_code: 'wmo code';
+  temperature_2m: '°C';
+  relative_humidity_2m: '%';
+  apparent_temperature: '°C';
+  precipitation: 'mm';
+  wind_speed_10m: 'km/h';
 };
 
 export type CurrentForecast = {
-  time?: string;
-  interval?: number;
-  weather_code?: number;
-  temperature_2m?: number;
+  time: string;
+  interval: number;
+  weather_code: number;
+  temperature_2m: number;
+  relative_humidity_2m: number;
+  apparent_temperature: number;
+  precipitation: number;
+  wind_speed_10m: number;
 };
 
 export type DailyUnits = {

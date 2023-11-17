@@ -1,5 +1,6 @@
 import { json, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { useState } from 'react';
 import CurrentForecast from '~/components/currentForecast';
 import DailyForecast from '~/components/dailyForecast';
 import Search from '~/components/search';
@@ -15,8 +16,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (!latLong) return null;
 
   const timezone = 'timezone=auto';
-  const forecast_days = 'forecast_days=14';
-  const current = 'current=weather_code,temperature_2m';
+  const forecast_days = 'forecast_days=10';
+  const current = 'current=weather_code,temperature_2m,precipitation,apparent_temperature,wind_speed_10m,relative_humidity_2m';
   const daily = 'daily=weather_code,temperature_2m_max,temperature_2m_min';
 
   const res = await fetch(
@@ -31,11 +32,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Index() {
   const forecast = useLoaderData<WeatherForecast>();
+  const [location, setLocation] = useState('CITY');
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center w-4/5 mx-auto py-12">
-      <Search />
-      {forecast && forecast.current && <CurrentForecast data={forecast.current} />}
+      <Search onLocationSearched={(newLocation) => setLocation(newLocation)} />
+      {location && (
+        <h2 className="font-bold text-2xl">
+          Weather {location === 'Your Location' ? 'at' : 'in'} <span>{location}</span>
+        </h2>
+      )}
+      {forecast && forecast.current && <CurrentForecast data={forecast.current} units={forecast.current_units} />}
       {forecast && forecast.daily && <DailyForecast data={forecast.daily} />}
     </div>
   );
