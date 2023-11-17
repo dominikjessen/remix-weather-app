@@ -35,7 +35,7 @@ export default function Index() {
   const [location, setLocation] = useState('CITY');
 
   return (
-    <div className="flex flex-col gap-8 items-center justify-center w-4/5 mx-auto py-12">
+    <div className="flex flex-col gap-8 items-center justify-center w-4/5 mx-auto py-4">
       <Search onLocationSearched={(newLocation) => setLocation(newLocation)} />
       {location && (
         <h2 className="font-bold text-2xl">

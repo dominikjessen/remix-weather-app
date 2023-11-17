@@ -10,7 +10,7 @@ export default function CurrentForecast({ data, units }: CurrentForecastProps) {
   return (
     <div className="w-full flex flex-col gap-8 items-center">
       <h3 className="font-bold text-2xl text-slate-700">Currently</h3>
-      <div className="flex gap-24 items-center py-8 px-24 bg-white">
+      <div className="flex gap-24 items-center py-8 px-24 bg-white rounded-xl">
         <div className="flex items-center gap-8">
           <WeatherIcon weather_code={data.weather_code} className="w-24 h-24" />
           <div className="flex gap-0.5">

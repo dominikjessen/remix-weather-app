@@ -84,14 +84,16 @@ export default function Search({ onLocationSearched }: SearchProps) {
           <ul className="absolute w-full bg-white">
             {searchResults.map((option) => (
               <li
-                role="button"
                 key={option.id}
+                tabIndex={0}
+                role="button"
                 onClick={() => handleOptionSelected(option)}
                 className="px-2 py-4 border w-full grid grid-cols-[min-content_1fr] items-center text-slate-700 hover:text-black hover:bg-slate-200 cursor-pointer"
               >
                 <span className="tracking-wider font-bold text-lg uppercase mr-4 font-mono">{option.country_code}</span>
                 <span className="tracking-wider">
-                  {option.name}, {option.admin1}
+                  {option.name}
+                  {option.admin1 ? `, ${option.admin1}` : ''}
                 </span>
               </li>
             ))}
