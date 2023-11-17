@@ -1,4 +1,4 @@
-import { Cloud, CloudDrizzle, CloudRain, Sun, CloudFog, Haze } from 'lucide-react';
+import { Cloud, Cloudy, CloudDrizzle, CloudRain, Sun, CloudFog, Haze, CloudSnow, CloudHail } from 'lucide-react';
 
 export interface WeatherIconProps {
   weather_code: number;
@@ -34,7 +34,7 @@ export default function WeatherIcon({ weather_code, className }: WeatherIconProp
     case 49:
       return <CloudFog className={className} />;
     case 3:
-      return <Cloud className={className} />;
+      return <Cloudy className={className} />;
     case 20:
     case 50:
     case 51:
@@ -51,6 +51,7 @@ export default function WeatherIcon({ weather_code, className }: WeatherIconProp
     case 68:
     case 80:
     case 83:
+    case 91:
       return <CloudDrizzle className={className} />;
     case 21:
     case 23:
@@ -66,7 +67,26 @@ export default function WeatherIcon({ weather_code, className }: WeatherIconProp
     case 81:
     case 82:
     case 84:
+    case 92:
+    case 95:
+    case 97:
       return <CloudRain className={className} />;
+
+    case 85:
+    case 86:
+    case 87:
+    case 88:
+    case 93:
+    case 94:
+      return <CloudSnow className={className} />;
+    case 27:
+    case 89:
+    case 90:
+    case 96:
+    case 99:
+      return <CloudHail className={className} />;
+    case 98:
+      return <Cloud className={className} />;
     default:
       return <Sun className={className} />;
   }

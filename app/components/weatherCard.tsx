@@ -19,6 +19,7 @@ export default function WeatherCard({ variant, data }: WeatherCardProps) {
         <span>{new Date(data.time).getMonth()}</span>
       </div>
       <div className="flex gap-2">
+        <p>{data.weather_code}</p>
         <WeatherIcon weather_code={data.weather_code} className="w-16 h-16" />
         {variant === 'minmax' ? (
           <div>

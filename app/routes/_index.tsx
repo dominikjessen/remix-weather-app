@@ -15,10 +15,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (!latLong) return null;
 
   const timezone = 'timezone=auto';
+  const forecast_days = 'forecast_days=14';
   const current = 'current=weather_code,temperature_2m';
   const daily = 'daily=weather_code,temperature_2m_max,temperature_2m_min';
 
-  const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latLong[0]}&longitude=${latLong[1]}&${timezone}&${current}&${daily}`);
+  const res = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${latLong[0]}&longitude=${latLong[1]}&${timezone}&${current}&${daily}&${forecast_days}`
+  );
   if (res.ok) {
     return json(await res.json());
   }
