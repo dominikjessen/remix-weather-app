@@ -12,22 +12,24 @@ export default function WeatherCard({ variant, data }: WeatherCardProps) {
   if (!data.weather_code || !(data.temperature_2m || (data.temperature_2m_min && data.temperature_2m_max)) || !data.time) return null;
 
   return (
-    <div className="w-full h-full p-16 rounded bg-white">
-      <div>
-        <span>{DAYS_OF_WEEK[new Date(data.time).getDay()]}</span>
-        <span>{new Date(data.time).getDate()}</span>
-        <span>{new Date(data.time).getMonth()}</span>
+    <div className="w-full h-full px-8 py-4 rounded-lg bg-white flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-col items-center gap-1 text-lg">
+        <span className="uppercase text-slate-600 tracking-wider font-bold">{DAYS_OF_WEEK[new Date(data.time).getDay()]}</span>
+        <div className="font-bold tracking-wider">
+          <span>{new Date(data.time).getDate()}</span>
+          <span>/</span>
+          <span>{new Date(data.time).getMonth() + 1}</span>
+        </div>
       </div>
-      <div className="flex gap-2">
-        <p>{data.weather_code}</p>
-        <WeatherIcon weather_code={data.weather_code} className="w-16 h-16" />
+      <div className="w-full flex gap-2 justify-around py-4">
+        <WeatherIcon weather_code={data.weather_code} className="w-12 h-12" />
         {variant === 'minmax' ? (
-          <div>
-            <div>H: {data.temperature_2m_max}</div>
-            <div>L: {data.temperature_2m_min}</div>
+          <div className="flex gap-1 items-end tracking-wider">
+            <div className="font-bold text-4xl">{data.temperature_2m_max?.toFixed(0)}°</div>
+            <div className="text-slate-600 text-lg">{data.temperature_2m_min?.toFixed(0)}°</div>
           </div>
         ) : (
-          <div>{data.temperature_2m}</div>
+          <div className="font-bold text-xl">{data.temperature_2m}</div>
         )}
       </div>
     </div>
