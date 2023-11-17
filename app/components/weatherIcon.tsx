@@ -71,7 +71,16 @@ export default function WeatherIcon({ weather_code, className }: WeatherIconProp
     case 95:
     case 97:
       return <CloudRain className={className} />;
-
+    case 70:
+    case 71:
+    case 72:
+    case 73:
+    case 74:
+    case 75:
+    case 76:
+    case 77:
+    case 78:
+    case 79:
     case 85:
     case 86:
     case 87:
