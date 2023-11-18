@@ -26,7 +26,7 @@ export default function CurrentForecast({ data, units }: CurrentForecastProps) {
           </div>
           <div className="flex gap-0.5">
             <span>Precipitation:</span>
-            <span>{data.precipitation.toFixed(0)}</span>
+            <span>{data.precipitation.toFixed(2)}</span>
             <span>{units?.precipitation}</span>
           </div>
           <div className="flex gap-0.5">

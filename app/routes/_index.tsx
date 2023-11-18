@@ -32,7 +32,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Index() {
   const forecast = useLoaderData<WeatherForecast>();
-  const [location, setLocation] = useState('CITY');
+  const [location, setLocation] = useState('');
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center w-4/5 mx-auto py-4">
