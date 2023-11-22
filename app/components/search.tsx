@@ -27,7 +27,10 @@ export default function Search({ onLocationSearched }: SearchProps) {
   }, [debouncedValue]);
 
   useEffect(() => {
-    if (!debouncedValue) return;
+    if (!debouncedValue) {
+      setSearchResults([]);
+      return;
+    }
 
     search();
     setSearchOptionsOpen(true);
@@ -45,6 +48,13 @@ export default function Search({ onLocationSearched }: SearchProps) {
     // Reset state
     setSearchValue('');
     setSearchResults([]);
+    setSearchOptionsOpen(false);
+  }
+
+  function searchBlurred(e: React.FocusEvent<HTMLInputElement, Element>) {
+    // If a list option is chosen, don't do anything as handleSelected will sort out click
+    if (e.relatedTarget) return;
+
     setSearchOptionsOpen(false);
   }
 
@@ -77,6 +87,8 @@ export default function Search({ onLocationSearched }: SearchProps) {
             placeholder="Search for a location"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
+            onBlur={searchBlurred}
+            onFocus={(e) => setSearchOptionsOpen(true)}
             className="pl-12 pr-2 py-5 bg-white grow rounded-xl text-lg"
           />
         </div>
