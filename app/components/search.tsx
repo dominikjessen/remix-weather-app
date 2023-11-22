@@ -42,7 +42,7 @@ export default function Search({ onLocationSearched }: SearchProps) {
     params.set('location', `${option.latitude},${option.longitude}`);
     setSearchParams(params);
 
-    // Notify parent
+    // Notify parent for title change
     onLocationSearched(`${option.name}, ${option.country_code.toUpperCase()}`);
 
     // Reset state
@@ -63,7 +63,14 @@ export default function Search({ onLocationSearched }: SearchProps) {
       const params = new URLSearchParams();
       params.set('location', `${position.coords.latitude},${position.coords.longitude}`);
       setSearchParams(params);
+
+      // Notify parent for title change
       onLocationSearched('Your Location');
+
+      // Reset state
+      setSearchOptionsOpen(false);
+      setSearchResults([]);
+      setSearchValue('');
     }
 
     function error() {
