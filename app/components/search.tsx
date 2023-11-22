@@ -68,7 +68,7 @@ export default function Search({ onLocationSearched }: SearchProps) {
   }
 
   return (
-    <div className="w-full flex gap-8 items-center">
+    <div className="w-full flex gap-4 lg:gap-8 items-center">
       {/* Searchbox with debounced type-ahead search */}
       <div className="w-full relative grow">
         <div className="flex relative w-full grow">

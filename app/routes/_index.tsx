@@ -35,10 +35,10 @@ export default function Index() {
   const [location, setLocation] = useState('');
 
   return (
-    <div className="flex flex-col gap-8 items-center justify-center w-4/5 mx-auto py-4">
+    <div className="flex flex-col gap-4 lg:gap-8 items-center justify-center w-11/12 md:w-4/5 mx-auto py-4">
       <Search onLocationSearched={(newLocation) => setLocation(newLocation)} />
       {location && (
-        <h2 className="font-bold text-2xl">
+        <h2 className="font-bold text-xl md:text-2xl">
           Weather {location === 'Your Location' ? 'at' : 'in'} <span>{location}</span>
         </h2>
       )}
