@@ -1,18 +1,6 @@
-<p align="center">
-  <a href="">
-    Remix Weather App
-  </a>
-  <div align="center">
-    <h3>Built with</h3>
-    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 64px)); gap: 1rem;">
-      <img width="64px" height="64px" src="/public/company-logos/typescript-color.svg" alt="Typescript" />
-      <img width="64px" height="64px" src="/public/company-logos/nextdotjs-color.svg" alt="Next.js" />
-      <img width="64px" height="64px" src="/public/company-logos/html5-color.svg" alt="HTML5" />
-      <img width="64px" height="64px" src="/public/company-logos/css3-color.svg" alt="CSS3" />
-      <img width="64px" height="64px" src="/public/company-logos/tailwindcss-color.svg" alt="Tailwind" />
-    </div>
-  </div>
-</p>
+# Remix Weather App
+
+A very simple app to get the weather using openmeteo's API built with Remix and deployed using Fly.io.
 
 ## About this app
 
