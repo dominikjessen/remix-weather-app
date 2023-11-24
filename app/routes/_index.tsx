@@ -7,7 +7,7 @@ import Search from '~/components/search';
 import { type WeatherForecast } from '~/types/weather';
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'Remix Weather Demo' }, { name: 'description', content: 'Check the weather in...' }];
+  return [{ title: 'Remix Weather App' }, { name: 'description', content: 'Check the weather in...' }];
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
